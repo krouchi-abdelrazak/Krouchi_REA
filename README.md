@@ -1,8 +1,8 @@
-# REA_DZ — Reverse-Engineering Workbench
+# Krouchi REA — Reverse-Engineering Workbench
 
-**An original, evidence-first reverse-engineering lab**: the methodology, the
-tool bootstrap, and the study reports behind a family of clean-room rebuilds
-of Algerian school-administration software.
+**An original, evidence-first reverse-engineering lab**: the methodology and
+the tool bootstrap behind a family of clean-room rebuilds of Algerian
+school-administration software.
 
 Built and maintained by **Krouchi Abderrazak** — director of Lycée Belkacem
 Mohamed, Tlemcen, Algeria.
@@ -13,11 +13,29 @@ Mohamed, Tlemcen, Algeria.
 
 | Part | What it holds |
 |---|---|
-| [`studies/`](studies/INDEX.md) | Study reports written from the binaries themselves — what each program does, how that was verified, and what remains unproven |
 | [`skills/rea/`](skills/rea/SKILL.md) | The REA working method: ask the binary to describe itself first, follow the evidence, rebuild only where new evidence proves a difference |
 | [`skills/re-nsa-library/`](skills/re-nsa-library/SKILL.md) | The reverse-engineering & NSA-tooling library notes (Ghidra practice, verification lessons) |
 | [`install/`](install/install_tools.sh) | One bootstrap script that rebuilds the whole lab on a fresh machine, plus the hard-won [toolchain notes](install/TOOLS_NOTES.md) |
 | [`tools/bin/`](tools/bin/) | The launchers the lab runs on (`rea`, `capa`, `diec`, `ilspycmd`, `pyinstxtractor`, `asar`) |
+
+## How a study flows
+
+```mermaid
+flowchart TD
+    A["Shipped program<br/>(EXE · APK · Electron · firmware)"] --> B{"Triage<br/>diec · capa"}
+    B --> C["Identify the stack<br/>.NET · PyInstaller · Electron · native · Android"]
+    C --> D["Decompile / unpack<br/>Ghidra · ILSpy · jadx · pyinstxtractor · asar"]
+    D --> E["Ask the binary to describe itself<br/>strings · resources · manifests · embedded docs"]
+    E --> F["Runtime observation<br/>run it, watch files / registry / network"]
+    F --> G["Evidence log<br/>every claim tied to an artifact"]
+    G --> H["Study report<br/>verified ≠ assumed, stated plainly"]
+    H --> I{"New evidence<br/>proves a difference?"}
+    I -- yes --> D
+    I -- no --> J["Clean-room rebuild<br/>original code, tested"]
+```
+
+More diagrams — tool map, lab layout, clean-room flow:
+[`docs/DIAGRAMS.md`](docs/DIAGRAMS.md).
 
 ## The toolchain
 
@@ -42,10 +60,11 @@ rea doctor                      # → healthy: true
 
 ## Studies
 
-Start with the [index](studies/INDEX.md) — the full sweep
-([REA_ALL_PROGRAMS.md](studies/REA_ALL_PROGRAMS.md)) compares every studied
-program: timetabling (asctime DZ, AliSchool, Moustachar), exam-centre
-management, certificates, grants, and the RGF.
+The lab's study reports are working documents: each one lives with the
+project it serves and is not published here. What this repository publishes
+is the *method* — how a program is triaged, decompiled, observed and turned
+into a verified behaviour spec — so anyone can run the same process on
+software they own.
 
 ## Credits
 

@@ -1,4 +1,4 @@
-# REA_DZ — مختبر الهندسة العكسية
+# Krouchi REA — مختبر الهندسة العكسية
 
 **مختبر هندسة عكسية أصلي يعمل بالدليل أولاً**: المنهجية، وسكربت تثبيت الأدوات،
 وتقارير الدراسة التي تقف وراء عائلة من إعادة البناء النظيفة لبرامج إدارة
@@ -12,11 +12,29 @@
 
 | الجزء | محتواه |
 |---|---|
-| [`studies/`](studies/INDEX.md) | تقارير دراسة مكتوبة من البرامج نفسها — ماذا يفعل كل برنامج، وكيف تحققنا، وما بقي غير مثبت |
 | [`skills/rea/`](skills/rea/SKILL.md) | طريقة العمل: دَع البرنامج يصف نفسه أولاً، اتبع الدليل، ولا تُعد البناء إلا حيث يثبت دليل جديد فرقاً |
 | [`skills/re-nsa-library/`](skills/re-nsa-library/SKILL.md) | مكتبة الهندسة العكسية وأدوات NSA (ممارسة Ghidra ودروس التحقق) |
 | [`install/`](install/install_tools.sh) | سكربت واحد يعيد بناء المختبر كله على جهاز جديد، مع [ملاحظات الأدوات](install/TOOLS_NOTES.md) المكتسبة بالتجربة |
 | [`tools/bin/`](tools/bin/) | مشغّلات المختبر (`rea`، `capa`، `diec`، `ilspycmd`، `pyinstxtractor`، `asar`) |
+
+## كيف تجري الدراسة
+
+```mermaid
+flowchart TD
+    A["Shipped program<br/>(EXE · APK · Electron · firmware)"] --> B{"Triage<br/>diec · capa"}
+    B --> C["Identify the stack<br/>.NET · PyInstaller · Electron · native · Android"]
+    C --> D["Decompile / unpack<br/>Ghidra · ILSpy · jadx · pyinstxtractor · asar"]
+    D --> E["Ask the binary to describe itself<br/>strings · resources · manifests · embedded docs"]
+    E --> F["Runtime observation<br/>run it, watch files / registry / network"]
+    F --> G["Evidence log<br/>every claim tied to an artifact"]
+    G --> H["Study report<br/>verified ≠ assumed, stated plainly"]
+    H --> I{"New evidence<br/>proves a difference?"}
+    I -- yes --> D
+    I -- no --> J["Clean-room rebuild<br/>original code, tested"]
+```
+
+مخططات أخرى — خريطة الأدوات، بنية المختبر، مسار إعادة البناء:
+[`docs/DIAGRAMS.md`](docs/DIAGRAMS.md).
 
 ## الأدوات
 
@@ -39,10 +57,10 @@ rea doctor                      # → healthy: true
 
 ## الدراسات
 
-ابدأ من [الفهرس](studies/INDEX.md) — والمسح الكامل
-([REA_ALL_PROGRAMS.md](studies/REA_ALL_PROGRAMS.md)) يقارن كل البرامج المدروسة:
-استعمال الزمن (asctime DZ، AliSchool، مستشار التربية)، تسيير مراكز الامتحان،
-الشهادات، المنح، والـRGF.
+تقارير دراسة المختبر وثائق عمل: كل تقرير يعيش مع المشروع الذي يخدمه ولا
+يُنشر هنا. ما ينشره هذا المستودع هو *الطريقة* — كيف يُفرز البرنامج ويُفكَّك
+ويُراقَب ويتحوّل إلى مواصفة سلوك مُتحقَّقة — ليجري أي شخص العملية نفسها على
+برامج يملكها.
 
 ## الشكر
 
