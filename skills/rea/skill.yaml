@@ -1,0 +1,5 @@
+name: "rea"
+title: "Reverse Engineer Anything with REA"
+description: "Reverse engineer a shipped binary, package, Electron app, or firmware with REA and explain how a feature works from evidence, or guide a reconstruction."
+category: "Work and knowledge"
+include_in_prompt: false
