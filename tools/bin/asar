@@ -1,0 +1,3 @@
+#!/bin/bash
+# @electron/asar launcher (app installed under ~/tools/asar-app)
+exec node "$HOME/tools/asar-app/node_modules/@electron/asar/bin/asar.mjs" "$@"

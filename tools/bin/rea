@@ -1,0 +1,9 @@
+#!/bin/bash
+# REA launcher with this machine's analysis engines wired in.
+# The engines live under ~/tools (persistent); only these env vars were lost.
+export GHIDRA_INSTALL_DIR="$HOME/tools/ghidra_12.1.4_PUBLIC"
+export REA_JADX_MCP_JAR="$HOME/tools/downloads/jadx-headless-mcp-0.7.1-all.jar"
+export HOPPER_LAUNCHER_PATH="/opt/hopper/bin/Hopper"
+export JAVA_HOME="$HOME/tools/jdk21"
+export PATH="$JAVA_HOME/bin:$PATH"
+exec "$HOME/workspace/custom-skills/rea/node_modules/.bin/rea" "$@"
