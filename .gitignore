@@ -1,0 +1,7 @@
+node_modules/
+tools/downloads/
+*.zip
+*.exe
+*.apk
+__pycache__/
+.DS_Store
